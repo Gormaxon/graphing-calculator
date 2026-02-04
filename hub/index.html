@@ -21,7 +21,8 @@ body{background:#000;min-height:100vh}
 <div id="advanced-panel"></div>
 <script>
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('/hub/sw.js', {scope: '/hub/'}).then(function(reg){
+  var _swBase = window.location.pathname.replace(/\/[^\/]*$/, '');
+  navigator.serviceWorker.register(_swBase+'/sw.js', {scope: _swBase+'/'}).then(function(reg){
     if(reg.active){loadHub()}
     else{
       var w=reg.installing||reg.waiting;

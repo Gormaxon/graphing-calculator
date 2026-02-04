@@ -1,6 +1,7 @@
 var _ci='0',_cm='standard',_ch=[],_gs=50,_go={x:0,y:0},_cv,_cx;
 var _wu='https://graphing-calc-math.gormax-g.workers.dev';
-var _hu='/hub';
+var _base = window.location.pathname.replace(/\/[^\/]*$/, '');
+var _hu=_base+'/hub';
 var _showHubMode = false;
 var _pendingGame = null;
 
