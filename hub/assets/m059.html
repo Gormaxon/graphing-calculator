@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var i=false;try{i=window.self!==window.top}catch(e){i=true}if(!i){window.location.replace('about:blank')}})();</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/hub/sw.js',{scope:'/hub/'})}</script>
+
+
+<script>(function(){var logs=[],panel=null;function createPanel(){if(panel)return;panel=document.createElement('div');panel.id='_errConsole';panel.style.cssText='position:fixed;bottom:10px;right:10px;width:350px;max-height:200px;background:rgba(0,0,0,0.9);color:#0f0;font-family:monospace;font-size:11px;padding:10px;border-radius:8px;overflow-y:auto;z-index:99999;display:block;border:1px solid #333;';var header=document.createElement('div');header.style.cssText='display:flex;justify-content:space-between;margin-bottom:8px;border-bottom:1px solid #333;padding-bottom:5px;';header.innerHTML='<span style="color:#fff;">Console</span><span id="_errClose" style="cursor:pointer;color:#f55;">X</span>';panel.appendChild(header);var content=document.createElement('div');content.id='_errContent';panel.appendChild(content);document.body.appendChild(panel);document.getElementById('_errClose').onclick=function(){panel.style.display='block'};}function addLog(type,args){var msg=Array.prototype.slice.call(args).map(function(a){if(typeof a==='object'){try{return JSON.stringify(a)}catch(e){return String(a)}}return String(a)}).join(' ');logs.push({type:type,msg:msg,time:new Date().toLocaleTimeString()});if(logs.length>50)logs.shift();updatePanel();}function updatePanel(){if(!panel)createPanel();var content=document.getElementById('_errContent');if(!content)return;var colors={error:'#f55',warn:'#fa0',log:'#0f0',info:'#0af'};content.innerHTML=logs.map(function(l){return'<div style="color:'+(colors[l.type]||'#fff')+';margin:2px 0;word-break:break-all;">['+l.time+'] '+l.msg+'</div>'}).join('');content.scrollTop=content.scrollHeight;panel.style.display='block';}var _log=console.log,_err=console.error,_warn=console.warn,_info=console.info;console.log=function(){addLog('log',arguments);_log.apply(console,arguments)};console.error=function(){addLog('error',arguments);_err.apply(console,arguments)};console.warn=function(){addLog('warn',arguments);_warn.apply(console,arguments)};console.info=function(){addLog('info',arguments);_info.apply(console,arguments)};window.addEventListener('error',function(e){addLog('error',[e.message+' at '+e.filename+':'+e.lineno])});window.addEventListener('unhandledrejection',function(e){addLog('error',['Unhandled rejection: '+e.reason])});var clicks=0;document.addEventListener('click',function(){clicks++;setTimeout(function(){clicks=0},500);if(clicks>=3&&panel){panel.style.display=panel.style.display==='none'?'block':'none'}})})();</script>
+<script>(function(){var PROXY='https://graphing-calc-math.gormax-g.workers.dev/proxy?url=';var ALLOWED=['cdn.jsdelivr.net','cdn.tailwindcss.com','unpkg.com','cdnjs.cloudflare.com','poki-gdn.com','poki.com','games.poki.com'];function shouldProxy(url){try{var u=new URL(url,location.href);for(var i=0;i<ALLOWED.length;i++){if(u.hostname===ALLOWED[i]||u.hostname.endsWith('.'+ALLOWED[i])){return true;}}return false;}catch(e){return false;}}function proxyUrl(url){return PROXY+encodeURIComponent(url);}var _fetch=window.fetch;window.fetch=function(input,init){var url=typeof input==='string'?input:(input&&input.url?input.url:'');if(url&&shouldProxy(url)){var newUrl=proxyUrl(url);if(typeof input==='string'){input=newUrl;}else if(input&&input.url){input=new Request(newUrl,input);}}return _fetch.call(this,input,init);};var _open=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(method,url){if(url&&shouldProxy(url)){url=proxyUrl(url);}return _open.apply(this,[method,url].concat(Array.prototype.slice.call(arguments,2)));};})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 059</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{height:100%;background:#0f0f0f;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow-y:auto}
+        .yt-header{position:sticky;top:0;background:#0f0f0f;padding:12px 16px;z-index:100;border-bottom:1px solid #272727}
+        .yt-search-bar{display:flex;gap:8px;max-width:700px;margin:0 auto}
+        .yt-search-bar input{flex:1;padding:10px 16px;background:#121212;border:1px solid #303030;border-radius:20px;color:#fff;font-size:14px;outline:none}
+        .yt-search-bar input:focus{border-color:#3ea6ff}
+        .yt-search-bar button{padding:10px 20px;background:#272727;border:none;border-radius:20px;color:#fff;cursor:pointer;font-size:14px}
+        .yt-search-bar button:hover{background:#3a3a3a}
+        .yt-results{max-width:700px;margin:16px auto;padding:0 16px}
+        .yt-card{display:flex;gap:12px;padding:12px 0;cursor:pointer;border-bottom:1px solid #272727}
+        .yt-card:hover{background:#1a1a1a}
+        .yt-thumb-wrap{position:relative;flex-shrink:0;width:200px;height:112px;border-radius:8px;overflow:hidden;background:#1a1a1a}
+        .yt-thumb-wrap img{width:100%;height:100%;object-fit:cover}
+        .yt-duration{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,0.8);color:#fff;padding:2px 6px;border-radius:4px;font-size:12px;font-weight:500}
+        .yt-info{min-width:0}
+        .yt-info h3{font-size:14px;font-weight:500;margin-bottom:6px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .yt-info .yt-channel{color:#aaa;font-size:12px}
+        .yt-player-view{display:none;max-width:900px;margin:0 auto}
+        .yt-player-view.active{display:block}
+        .yt-back-btn{padding:10px 16px;background:none;border:none;color:#3ea6ff;cursor:pointer;font-size:14px;margin:12px 16px}
+        .yt-back-btn:hover{text-decoration:underline}
+        .yt-video-wrap{position:relative;width:100%;background:#000}
+        .yt-video-wrap video{width:100%;max-height:70vh;display:block}
+        .yt-now-title{padding:16px 16px 8px;font-size:18px;font-weight:500}
+        .yt-now-channel{padding:0 16px 8px;color:#aaa;font-size:14px}
+        .yt-msg{text-align:center;padding:40px;color:#888}
+        .yt-msg.error{color:#f55}
+        @media(max-width:500px){
+            .yt-card{flex-direction:column}
+            .yt-thumb-wrap{width:100%;height:0;padding-bottom:56.25%;position:relative}
+            .yt-thumb-wrap img{position:absolute;top:0;left:0}
+        }
+    </style>
+</head>
+<body>
+    <div id="yt-search-view">
+        <div class="yt-header">
+            <div class="yt-search-bar">
+                <input type="text" id="yt-query" placeholder="Search YouTube..." onkeydown="if(event.key==='Enter')ytSearch()">
+                <button onclick="ytSearch()">Search</button>
+            </div>
+        </div>
+        <div id="yt-results" class="yt-results">
+            <div class="yt-msg">Search for videos above</div>
+        </div>
+    </div>
+    <div id="yt-player-view" class="yt-player-view">
+        <button class="yt-back-btn" onclick="ytBack()">&larr; Back to results</button>
+        <div class="yt-video-wrap">
+            <video id="yt-player" controls playsinline></video>
+        </div>
+        <div id="yt-now-title" class="yt-now-title"></div>
+        <div id="yt-now-channel" class="yt-now-channel"></div>
+    </div>
+    <script>
+    var WORKER='https://graphing-calc-math.gormax-g.workers.dev';
+    var currentResults=[];
+
+    function parseDuration(iso){
+        if(!iso)return'';
+        var m=iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+        if(!m)return'';
+        var h=parseInt(m[1]||'0'),mi=parseInt(m[2]||'0'),s=parseInt(m[3]||'0');
+        var ss=s<10?'0'+s:''+s;
+        if(h>0){var ms=mi<10?'0'+mi:''+mi;return h+':'+ms+':'+ss}
+        return mi+':'+ss;
+    }
+
+    function fmtSec(sec){
+        var h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
+        var ss=s<10?'0'+s:''+s;
+        if(h>0){var ms=m<10?'0'+m:''+m;return h+':'+ms+':'+ss}
+        return m+':'+ss;
+    }
+
+    function esc(str){var d=document.createElement('div');d.textContent=str;return d.innerHTML}
+
+    function ytSearch(){
+        var q=document.getElementById('yt-query').value.trim();
+        if(!q)return;
+        var r=document.getElementById('yt-results');
+        r.innerHTML='<div class="yt-msg">Searching...</div>';
+        fetch(WORKER+'/youtube/search?q='+encodeURIComponent(q))
+        .then(function(resp){return resp.json()})
+        .then(function(data){
+            if(data.error){r.innerHTML='<div class="yt-msg error">'+esc(data.error)+'</div>';return}
+            currentResults=data.results||[];
+            renderResults();
+        })
+        .catch(function(err){r.innerHTML='<div class="yt-msg error">Failed: '+esc(err.message)+'</div>'});
+    }
+
+    function renderResults(){
+        var r=document.getElementById('yt-results');
+        if(currentResults.length===0){r.innerHTML='<div class="yt-msg">No results found</div>';return}
+        var html='';
+        for(var i=0;i<currentResults.length;i++){
+            var v=currentResults[i];
+            var dur=parseDuration(v.duration);
+            html+='<div class="yt-card" onclick="ytPlay(\''+v.videoId+'\')">'
+                +'<div class="yt-thumb-wrap">'
+                +'<img src="'+esc(v.thumbnail)+'" alt="">'
+                +(dur?'<span class="yt-duration">'+dur+'</span>':'')
+                +'</div>'
+                +'<div class="yt-info">'
+                +'<h3>'+esc(v.title)+'</h3>'
+                +'<span class="yt-channel">'+esc(v.channel)+'</span>'
+                +'</div></div>';
+        }
+        r.innerHTML=html;
+    }
+
+    function ytPlay(videoId){
+        var clickedVideo=null;
+        for(var ci=0;ci<currentResults.length;ci++){
+            if(currentResults[ci].videoId===videoId){clickedVideo=currentResults[ci];break}
+        }
+
+        document.getElementById('yt-search-view').style.display='none';
+        var pv=document.getElementById('yt-player-view');
+        pv.classList.add('active');
+        document.getElementById('yt-now-title').textContent=clickedVideo?clickedVideo.title:'Loading video...';
+        document.getElementById('yt-now-channel').textContent=clickedVideo?clickedVideo.channel:'';
+
+        fetch(WORKER+'/youtube/info?v='+videoId)
+        .then(function(resp){return resp.json()})
+        .then(function(data){
+            if(data.error){
+                document.getElementById('yt-now-title').textContent='Error: '+data.error;
+                if(data.debug) console.error('Debug: '+data.debug);
+                return;
+            }
+            if(data.debug) console.log('Info debug: '+data.debug);
+            if(data.title) document.getElementById('yt-now-title').textContent=data.title;
+            if(data.uploader) document.getElementById('yt-now-channel').textContent=data.uploader+(data.duration?' · '+fmtSec(data.duration):'');
+
+            var player=document.getElementById('yt-player');
+            var streamUrl=WORKER+'/youtube/stream?url='+encodeURIComponent(data.streamUrl);
+            player.src=streamUrl;
+            player.play().catch(function(){});
+        })
+        .catch(function(err){
+            document.getElementById('yt-now-title').textContent='Failed: '+err.message;
+        });
+    }
+
+    function ytBack(){
+        var player=document.getElementById('yt-player');
+        player.pause();
+        player.src='';
+        document.getElementById('yt-player-view').classList.remove('active');
+        document.getElementById('yt-search-view').style.display='block';
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+body{
+    text-align: center;
+    background-color: #121213;
+    color: white;
+    font-family: 'nyt-franklin';
+    src: url('./fonts/franklin-normal-500.woff2') format('woff2'),
+        url('./fonts/franklin-normal-500.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+h1{
+    font-weight: 700;
+    font-size: 37px;
+    line-height: 100%;
+    letter-spacing: 0.01em;
+    text-align: center;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    border-bottom: 1px solid;
+    border-color: rgb(71, 71, 71);
+    padding-bottom: 6px;
+}   
+.row {
+    display: inline-flex;
+    gap: 3px;
+    padding: 2px;
+    width: 50%;
+}
+#WorldeContainer {
+    position: relative;
+    left: 18%;
+    width: 70%;
+}
+  
+.block {
+    width: 30px;
+    display: inline-flex;   
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: bold;
+    vertical-align: middle;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    user-select: none;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 1px solid;
+    border-color: rgb(71, 71, 71);
+    height: 80px;
+}
+#keyboardcontainer{
+    position: relative;
+    left: 14%;
+    width: 70%;
+}
+.keyboardblock{
+    display: inline-flex;   
+    background-color: #818384;
+    font-size: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+#Backspace{
+    width: 50px;
+}
+
+button{
+    color: white;
+    background-color: #121213;
+    border-radius: 20px;
+    border: none;
+    padding: 15px;
+    position: absolute;
+    top: 0%;
+    left: 2%;
+}
+button:hover{
+    color:green;
+}
+#youwin{
+    position: absolute;
+    border: none;
+    top: 10%;
+    width: 50%;
+    height: 800px;
+    left: 25%;
+    background-color: #121213;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hub</title>
+<script>
+(function(){
+  var inIframe = false;
+  try { inIframe = window.self !== window.top; } catch (e) { inIframe = true; }
+  if (!inIframe) { window.location.replace('about:blank'); }
+})();
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;min-height:100vh}
+</style>
+</head>
+<body>
+<div id="calc-app" style="display:none"></div>
+<div id="advanced-panel"></div>
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/hub/sw.js', {scope: '/hub/'}).then(function(reg){
+    if(reg.active){loadHub()}
+    else{
+      var w=reg.installing||reg.waiting;
+      if(w){w.addEventListener('statechange',function(){if(w.state==='activated')loadHub()})}
+      else{loadHub()}
+    }
+  }).catch(function(){loadHub()});
+}else{loadHub()}
+function loadHub(){
+  var d=document.createElement('script');d.src='data.js';
+  d.onload=function(){
+    var c=document.createElement('script');c.src='core.js';
+    c.onload=function(){if(typeof _loadModules==='function')_loadModules()};
+    document.body.appendChild(c);
+  };
+  document.body.appendChild(d);
+}
+</script>
+<script src="error-console.js"></script>
+</body>
+</html>
